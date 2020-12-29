@@ -4,13 +4,13 @@ installation from minimal nixos iso, on a windows-10 hyper-V :)
 
 1. setup the keyboard
 
-    ```bash
+    ```console
     sudo loadkeys de
     ```
 
 2. booting should have installed ethernet
 
-    ```bash
+    ```console
     ip a
     # connect to wifi with:
     wpa_supplicant -B -i interface -c <(wpa_passphrase 'SSID' 'key')
@@ -18,7 +18,7 @@ installation from minimal nixos iso, on a windows-10 hyper-V :)
 
 3. partition your disk on UEFI with `parted`
 
-    ```bash
+    ```console
     parted /dev/sda -- mklabel gpt
     # root
     parted /dev/sda -- mkpart primary 1024MiB -16GiB
@@ -31,7 +31,7 @@ installation from minimal nixos iso, on a windows-10 hyper-V :)
 
 4. format your disks
 
-    ```bash
+    ```console
     mkfs.ext4 -L nixos /dev/sda1
     mkswap -L swap /dev/sda2
     mkfs.fat -F 32 -n boot /dev/sda3
@@ -39,7 +39,7 @@ installation from minimal nixos iso, on a windows-10 hyper-V :)
 
 5. mount the disks
 
-    ```bash
+    ```console
     mount /dev/disk/by-label/nixos /mnt
     mkdir -p /mnt/boot
     mount /dev/disk/by-label/boot /mnt/boot
@@ -48,14 +48,14 @@ installation from minimal nixos iso, on a windows-10 hyper-V :)
 
 6. edit or create your config
 
-    ```bash
+    ```console
     nixos-generate-config --root /mnt
     nano /mnt/etc/nixos/configuration.nix
     ```
 
 7. add the hyper-v config
 
-    ```bash
+    ```console
     ## hyper V ##
     # REQUIRED - see: https://github.com/nixos/nixpkgs/issues/9899
     boot.initrd.kernelModules = ["hv_vmbus" "hv_storvsc"];
@@ -72,7 +72,7 @@ installation from minimal nixos iso, on a windows-10 hyper-V :)
 
 8. install
 
-    ```bash
+    ```console
     nixos-install
     reboot
     # change root password
