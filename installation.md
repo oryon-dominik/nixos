@@ -4,16 +4,21 @@ installation from minimal nixos iso, on a windows-10 hyper-V :)
 
 1. setup the keyboard
 
+    ```bash
     sudo loadkeys de
+    ```
 
 2. booting should have installed ethernet
 
+    ```bash
     ip a
     # connect to wifi with:
     wpa_supplicant -B -i interface -c <(wpa_passphrase 'SSID' 'key')
+    ```
 
 3. partition your disk on UEFI with `parted`
 
+    ```bash
     parted /dev/sda -- mklabel gpt
     # root
     parted /dev/sda -- mkpart primary 1024MiB -16GiB
@@ -22,27 +27,35 @@ installation from minimal nixos iso, on a windows-10 hyper-V :)
     # boot
     parted /dev/sda -- mkpart ESP fat32 1MiB 1024MiB
     parted /dev/sda -- set 3 esp on
+    ```
 
 4. format your disks
 
+    ```bash
     mkfs.ext4 -L nixos /dev/sda1
     mkswap -L swap /dev/sda2
     mkfs.fat -F 32 -n boot /dev/sda3
+    ```
 
 5. mount the disks
 
+    ```bash
     mount /dev/disk/by-label/nixos /mnt
     mkdir -p /mnt/boot
     mount /dev/disk/by-label/boot /mnt/boot
     swapon /dev/sda2
+    ```
 
 6. edit or create your config
 
+    ```bash
     nixos-generate-config --root /mnt
     nano /mnt/etc/nixos/configuration.nix
+    ```
 
 7. add the hyper-v config
 
+    ```bash
     ## hyper V ##
     # REQUIRED - see: https://github.com/nixos/nixpkgs/issues/9899
     boot.initrd.kernelModules = ["hv_vmbus" "hv_storvsc"];
@@ -55,9 +68,11 @@ installation from minimal nixos iso, on a windows-10 hyper-V :)
     # UNKNOWN - not sure if below are needed; were suggested for VirtualBox and I used them
     boot.loader.grub.device = "/dev/sda";
     boot.initrd.checkJournalingFS = false;
+    ```
 
 8. install
 
+    ```bash
     nixos-install
     reboot
     # change root password
@@ -69,7 +84,4 @@ installation from minimal nixos iso, on a windows-10 hyper-V :)
     nix-env -qaP \*
     # install sway
     nix-env -f '<nixpkgs>' -iA sway
-
-
-
-
+    ```
