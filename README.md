@@ -1,2 +1,2 @@
 # nixos-config
-oryon' s nixos-configuration
+oryon's nixos-configuration

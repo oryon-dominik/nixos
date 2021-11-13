@@ -16,7 +16,7 @@ installation from minimal nixos iso, on a windows-10 hyper-V :)
     wpa_supplicant -B -i interface -c <(wpa_passphrase 'SSID' 'key')
     ```
 
-3. partition your disk on UEFI with `parted`
+3. partition your disk (pretending it's `/dev/sda`, you can check it with `lsblk`) on UEFI with `parted`
 
     ```sh
     parted /dev/sda -- mklabel gpt
@@ -53,21 +53,10 @@ installation from minimal nixos iso, on a windows-10 hyper-V :)
     nano /mnt/etc/nixos/configuration.nix
     ```
 
-7. add the hyper-v config
+7. surfacebook config
 
     ```sh
-    ## hyper V ##
-    # REQUIRED - see: https://github.com/nixos/nixpkgs/issues/9899
-    boot.initrd.kernelModules = ["hv_vmbus" "hv_storvsc"];
-    # RECOMMENDED
-    # - use 800x600 resolution for text console, to make it easy to fit on screen
-    boot.kernelParams = ["video=hyperv_fb:800x600"];  # https://askubuntu.com/a/399960
-    # - avoid a problem with `nix-env -i` running out of memory
-    boot.kernel.sysctl."vm.overcommit_memory" = "1"; # https://github.com/NixOS/nix/issues/421
-
-    # UNKNOWN - not sure if below are needed; were suggested for VirtualBox and I used them
-    boot.loader.grub.device = "/dev/sda";
-    boot.initrd.checkJournalingFS = false;
+    # see .. https://github.com/oryon-dominik/nixos/blob/master/configuration.nix
     ```
 
 8. install
