@@ -1,0 +1,2 @@
+# don't overwrite local hardware. Get's imported in the corresponding machine-configuration.
+hardware-configuration.nix
