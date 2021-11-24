@@ -4,25 +4,25 @@
   imports = [
     # Microsoft Surface package for nixos
     "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/microsoft/surface"
-    # Include the results of the hardware scan.
+    # Always include the results of the hardware scan.
     ../../hardware-configuration.nix
   ];
 
-  boot {
+  boot = {
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
     initrd.kernelModules = [ ];
     kernelModules = [ "kvm-intel" ];
     # kernelModules = mkBefore [ "kvm-intel" ]; # will load before any other kernel modules..
     extraModulePackages = [ ];
 
-    loader {  # Use the systemd-boot EFI boot loader.
+    loader = {  # Use the systemd-boot EFI boot loader.
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
 
   };
 
-  fileSystems {
+  fileSystems = {
     "/" = {
       device = "/dev/disk/by-label/system";
       fsType = "ext4";
@@ -33,9 +33,9 @@
     };
   };
 
-  swapDevices =[
-      { device = "/dev/disk/by-label/swap"; }
-    ];
+  swapDevices = [
+    { device = "/dev/disk/by-label/swap"; }
+  ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   # high-resolution display

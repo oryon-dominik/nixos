@@ -4,7 +4,7 @@
     name = "oryon";
     description = "Oryon is one of the most conspicuous and recognizable constellations in the night sky. Or why (you're) (not?) on?";
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker", "networkmanager"];
+    extraGroups = [ "wheel" "docker" "networkmanager"];  # "surface-control"
     shell = pkgs.fish;
     uid = 1337;
     home = "/home/oryon";
