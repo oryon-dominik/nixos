@@ -1,22 +1,26 @@
 # nixos installation
 
-Installation from minimal nixos iso
+Using an iso [from here](https://releases.nixos.org/?prefix=nixos/).
 
-1. setup the keyboard
+1. Setup the keyboard.
 
     ```sh
     sudo loadkeys de
     ```
 
-2. booting should have installed ethernet
+2. Booting should have installed ethernet.
 
     ```sh
+    # identify your interface name
     ip a
-    # connect to wifi with:
+    # connect to wifi
     wpa_supplicant -B -i {interface} -c <(wpa_passphrase '{SSID}' '{key}')
     ```
 
-3. partition your disk (pretending it's `/dev/sda`, you can check it with `lsblk`) on UEFI with `parted`
+3. Partitions on UEFI with `parted` (pretending the device is `/dev/sda`, you can check it with `lsblk`).
+
+I'm ignoring the warning `Warning: The resulting partition is not properly aligned for best performance.` 
+here, because [I don't know better](https://rainbow.chard.org/2013/01/30/how-to-align-partitions-for-best-performance-using-parted/).
 
     ```sh
     parted /dev/sda -- mklabel gpt
@@ -29,7 +33,7 @@ Installation from minimal nixos iso
     parted /dev/sda -- set 3 esp on
     ```
 
-4. format your disks
+4. Format and label your disks.
 
     ```sh
     mkfs.ext4 -L system /dev/sda1
@@ -37,7 +41,7 @@ Installation from minimal nixos iso
     mkfs.fat -F 32 -n boot /dev/sda3
     ```
 
-5. mount the disks
+5. Mount 'em.
 
     ```sh
     mount /dev/disk/by-label/system /mnt
@@ -46,23 +50,35 @@ Installation from minimal nixos iso
     swapon /dev/sda2
     ```
 
-6. edit or create your config
+6. Clone your config.
 
     ```sh
     nixos-generate-config --root /mnt
+    mv /mnt/etc/nixos /mnt/etc/nixos.backup
     nix-env --install git
     git clone https://github.com/oryon-dominik/nixos /mnt/etc/nixos/
-    nano /mnt/etc/nixos/configuration.nix  # import the correct machine settings for your device :)
+    cp /mnt/etc/nixos.backup/hardware-configuration.nix /mnt/etc/nixos/hardware-configuration.nix
     ```
 
-7. machine config
+7. Machine config.
+
+Only keep the necessary machine settings for your device. Comment out useless parts.
 
     ```sh
-    
-    # see .. https://github.com/oryon-dominik/nixos/blob/master/configuration.nix
+    nano /mnt/etc/nixos/configuration.nix
     ```
 
-if something goes wrong you can't fix, reboot and mount again
+    ```sh
+    imports = [
+    # Device specific hardware configuration (change this to your device)
+    ./machines/default  # <-----
+    # ./machines/surface
+    # ./machines/raspberry
+    ...
+    ]
+    ```
+
+If something goes wrong you can't fix, reboot and mount (5) again.
 
     ```sh
     mount /dev/disk/by-label/system /mnt
@@ -76,5 +92,5 @@ if something goes wrong you can't fix, reboot and mount again
     ```sh
     nixos-install
     reboot
-    # change root password
-    passwd
+    # change passwords for root and your user logins
+    passwd [options] [LOGIN]
