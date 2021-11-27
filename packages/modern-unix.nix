@@ -11,3 +11,4 @@
     dogdns  # command-line DNS client - https://github.com/ogham/dog
     # to be continued..
   ];
+}
