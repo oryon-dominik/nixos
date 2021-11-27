@@ -95,13 +95,21 @@ If something goes wrong you can't fix, reboot and mount (5) again.
     # change passwords for root and your user logins
     passwd [options] [LOGIN]
 
-If you want to implment changes after succesfull installation, build a new config with the next boot.
+If you want to implement changes after succesfull installation, build a new config with the next boot.
 
     ```sh
     nixos-rebuild boot
     ```
 
-9. Restricting access
+
+9. Extras
+
+## Interactive exploration of the config.
+
+    nix repl '<nixpkgs/nixos>'  # quit with ctrl+d or ':q'
+
+
+## Restricting access
 
 To limit which users can perform Nix operations, you can use the permissions on the directory /nix/var/nix/daemon-socket.
  For instance, if you want to restrict the use of Nix to the members of a group called nix-users, do
