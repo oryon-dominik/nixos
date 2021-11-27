@@ -87,7 +87,7 @@ If something goes wrong you can't fix, reboot and mount (5) again.
     nano /mnt/etc/nixos/configuration.nix
     ```
 
-8. install
+8. Install
 
     ```sh
     nixos-install
@@ -100,3 +100,14 @@ If you want to implment changes after succesfull installation, build a new confi
     ```sh
     nixos-rebuild boot
     ```
+
+9. Restricting access
+
+To limit which users can perform Nix operations, you can use the permissions on the directory /nix/var/nix/daemon-socket.
+ For instance, if you want to restrict the use of Nix to the members of a group called nix-users, do
+
+    chgrp nix-users /nix/var/nix/daemon-socket
+    chmod ug=rwx,o= /nix/var/nix/daemon-socket
+
+This way, users who are not in the nix-users group cannot connect to the Unix domain socket /nix/var/nix/daemon-socket/socket,
+ so they cannot perform Nix operations.
