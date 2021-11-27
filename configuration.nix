@@ -71,7 +71,7 @@
   powerManagement.enable = true;
 
   fonts = {
-    enableFontDir = true;
+    fontDir.enabled = true;
     fonts = [ pkgs.nerdfonts ];
   };
 
