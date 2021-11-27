@@ -28,6 +28,7 @@
 
     # TODO: vpn ./vpn.nix
     # TODO: gnome ./gnome.nix
+    # TODO: containers ./containers.nix
   ];
 
   # Localization
@@ -70,7 +71,9 @@
   # Enable auto-upgrades:
   # system.autoUpgrade.enable = true;
   # system.autoUpgrade.allowReboot = true;
-  # system.autoUpgrade.channel = https://nixos.org/channels/nixos-21.11;
+
+  system.autoUpgrade.channel = https://nixos.org/channels/nixos-21.11;
+  # nix-channel --add https://nixos.org/channels/nixos-unstable
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
