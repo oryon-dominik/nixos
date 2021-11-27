@@ -2,6 +2,8 @@
   # --- Modern Unix Packages --------------------------------------------------
   # inspired by: https://github.com/ibraheemdev/modern-unix
 
+  dogWithPriority = pkgs.dogdns.override {meta.priority = "1";};
+
   # Search for packages installed in system profile:  # $ nix search <pkgname>
   environment.systemPackages = with pkgs; [
 
@@ -35,7 +37,6 @@
     tokei  # statistics about your code - https://github.com/XAMPPRocky/tokei
 
     # gping  # Ping, but with a graph - https://github.com/orf/gping  # FIXME: broken on nixos for now
-    dogdns.override {meta.priority = "1";}  # command-line DNS client - https://github.com/ogham/dog
     xh  # send HTTP requests - https://github.com/ducaale/xh
     curlie  # curl wrapper - https://github.com/rs/curlie
     bandwhich  # current network utilization - https://github.com/imsnif/bandwhich
@@ -47,5 +48,6 @@
   ]
   ++ [
     # other packages
+    dogWithPriority  # command-line DNS client - https://github.com/ogham/dog
   ];
 }
