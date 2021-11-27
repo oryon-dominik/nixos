@@ -80,3 +80,11 @@ Run a shell in which the specified packages are available
     nix shell nixpkgs#youtube-dl
 
 (https://nixos.org/manual/nix/unstable/command-ref/new-cli/nix3-shell.html)
+
+
+## other stuff
+
+get the store location of a binary
+
+    readlink -f (which dog)
+

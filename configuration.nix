@@ -51,7 +51,37 @@
     CONFIG_SERIAL_DEV_CTRL_TTYPORT = "y";
   };
 
+  # Common aliases for all users..
+  environment.interactiveShellInit = ''
+    alias ..='cd ..'
+    alias cd..='cd ..'
+    alias cd..='cd ..'
+    alias cls='clear'
+
+    alias ls='exa --group-directories-first --git-ignore'
+    alias ll='exa --color-scale --long --header --group-directories-first'
+    alias la='exa --all --color-scale --long --header --group-directories-first'
+    alias lt='exa --tree --color-scale --group-directories-first'
+    alias l='exa --all --color-scale --long --header --git --group-directories-first'
+
+    alias ports='netstat -tulpen'
+  '';
+
+
   powerManagement.enable = true;
+
+  fonts = {
+    enableFontDir = true;
+    fonts = [ pkgs.nerdfonts ];
+  };
+
+  # nixpkgs = {
+  #   config = { allowUnfree = true; allowBroken = false; };
+  # };
+
+  # nix.maxJobs = 32;
+  # nix.buildCores = 4;
+
 
   # Enable sound.
   # sound.enable = true;
@@ -76,8 +106,10 @@
   # system.autoUpgrade.enable = true;
   # system.autoUpgrade.allowReboot = true;
 
-  system.autoUpgrade.channel = https://nixos.org/channels/nixos-21.11;
-  # nix-channel --add https://nixos.org/channels/nixos-unstable
+  system.autoUpgrade.channel = https://nixos.org/channels/nixos-unstable;
+  # nix-channel --add https://nixos.org/channels/nixos-21.11 nixos
+  # nix-channel --add https://nixos.org/channels/nixos-unstable nixos-unstable
+  # nix-channel --update
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -88,3 +120,4 @@
   system.stateVersion = "21.11"; # Did you read the comment?
 
 }
+ 
