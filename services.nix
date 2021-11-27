@@ -95,6 +95,13 @@
   #   ];
   # };
 
+  # Sleepmodes..
+  # systemd.targets.sleep.enable = false;
+  # systemd.targets.suspend.enable = false;
+  # systemd.targets.hibernate.enable = false;
+  # systemd.targets.hybrid-sleep.enable = false;
+
+
   # === SSH ===========================================================================================================
   # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/ssh/sshd.nix
   services.sshd.enable = true;
@@ -119,5 +126,12 @@
   #       "wiki.example.org" = (commonConfig // { documentRoot = "/webroot/wiki.example.com"; });
   #     };
   # }
+
+  # === XRDP ==========================================================================================================
+  services.xrdp.enable = true;
+  services.xrdp.defaultWindowManager = "startplasma-x11";
+  networking.firewall.allowedTCPPorts = [ 3389 ];
+  # Soon: services.xrdp.openFirewall = true;
+
 
 }
