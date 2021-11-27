@@ -26,24 +26,6 @@
     '';
   };
 
-  programs.starship = {
-    enable = true;
-    enableFishIntegration = true;
-    # Configuration written to ~/.config/starship.toml
-    settings = {
-      # add_newline = false;
+  # home-manager.users.oryon = import ./home.nix {};
 
-      # character = {
-      #   success_symbol = "[➜](bold green)";
-      #   error_symbol = "[➜](bold red)";
-      # };
-
-      # package.disabled = true;
-    };
-  };
-
-
-  # home-manager.users.oryon = { pkgs, ... }: {
-  # home.packages = [ pkgs.duf pkgs.httpie ];  # packages to install in the home directory of the user.
-  # programs.bash.enable = true;
 }

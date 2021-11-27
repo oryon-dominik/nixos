@@ -26,7 +26,7 @@
     ./services.nix
 
     # Users - Don't forget to set a password with 'passwd'.
-    ./users/oryon.nix
+    ./users/oryon
 
     # TODO: vpn ./vpn.nix
     # TODO: gnome ./gnome.nix
