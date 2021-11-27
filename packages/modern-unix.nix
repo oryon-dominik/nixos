@@ -34,9 +34,7 @@
     tokei  # statistics about your code - https://github.com/XAMPPRocky/tokei
 
     # gping  # Ping, but with a graph - https://github.com/orf/gping  # FIXME: broken on nixos for now
-    (dogdns.overrideAttrs (oldAttrs: {  # command-line DNS client - https://github.com/ogham/dog
-        meta = {priority = "1";}
-    }))
+    dogdns.override {meta.priority = "1";}  # command-line DNS client - https://github.com/ogham/dog
     xh  # send HTTP requests - https://github.com/ducaale/xh
     curlie  # curl wrapper - https://github.com/rs/curlie
     bandwhich  # current network utilization - https://github.com/imsnif/bandwhich
@@ -45,5 +43,8 @@
     cheat  # CLI cheatsheet - https://github.com/cheat/cheat
 
     # to be continued..
+  ]
+  ++ [
+    # other packages
   ];
 }

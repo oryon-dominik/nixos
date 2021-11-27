@@ -24,7 +24,7 @@
       mcfly init fish | source
       starship init fish | source
     '';
-  }
+  };
 
   programs.starship = {
     enable = true;
