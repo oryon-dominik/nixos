@@ -5,6 +5,7 @@
   # Search for packages installed in system profile:  # $ nix search <pkgname>
   environment.systemPackages = with pkgs; [
 
+    starship  # shell prompt - https://starship.rs/
     # ! exa has been aliased to ls
     exa  # modern ls - https://github.com/ogham/exa
     bat  # cat clone with syntax highlighting - https://github.com/sharkdp/bat
