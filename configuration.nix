@@ -16,6 +16,8 @@
     # Packages
     ./packages/common.nix
     ./packages/modern-unix.nix
+    # ./databases/postgres.nix
+    # ./databases/postgres-update.nix
 
     # Network
     ./network.nix
