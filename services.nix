@@ -97,10 +97,9 @@
 
   # === SSH ===========================================================================================================
   # https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/networking/ssh/sshd.nix
-  # services.openssh.enable = true;
   services.sshd.enable = true;
-  services.sshd.passwordAuthentication = false;
-  services.sshd.permitRootLogin = "no";
+  services.openssh.passwordAuthentication = false;
+  services.openssh.permitRootLogin = "no";
 
   # === HTTPD =========================================================================================================
   # enable the Apache HTTP Server with /webroot as the document root:
