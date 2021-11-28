@@ -100,7 +100,17 @@ If you want to implement changes after succesfull installation, build a new conf
     ```
 
 
-9. Extras
+9.  SSH-Key for github-access.
+
+When logged into your user-account.
+
+    mkdir -p ~/.ssh
+    ssh-keygen -t ecdsa -b 521 -f ~/.ssh/id_ecdsa_GITHUB -C "oryon@cyberise.de/nixos" -q -N ""
+    echo "Add this key to your GITHUB ssh-keys to gain access:"
+    echo (lolcat ~/.ssh/id_ecdsa_GITHUB.pub)
+
+
+10. Extras
 
 ## Interactive exploration of the config.
 

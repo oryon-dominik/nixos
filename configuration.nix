@@ -7,11 +7,14 @@
 
 { config, pkgs, ... }: {
 
-
   # DENY root login
   users.users.root.hashedPassword = "!";  # '!' is not hashable, so root login is prohibited
   users.mutableUsers = false;
   nix.allowedUsers = [ "oryon" ];  # it's me!
+  nix.extraOptions = ''
+      experimental-features = nix-command
+    '';
+  nixpkgs.config.allowUnfree = false;  # -> explicitly allow single packages
 
   # fish-shell (requires modern-unix packages imported)
   programs.fish = {
@@ -32,6 +35,7 @@
     # Packages
     ./packages/common.nix
     ./packages/modern-unix.nix
+    ./packages/vscode.nix
     # ./databases/postgres.nix
     # ./databases/postgres-update.nix
 
@@ -136,7 +140,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.11"; # Did you read the comment?
+  system.stateVersion = "21.11"; # Current unstable version
 
 }
- 
