@@ -7,6 +7,22 @@
 
 { config, pkgs, ... }: {
 
+
+  # DENY root login
+  users.users.root.hashedPassword = "!";  # '!' is not hashable, so root login is prohibited
+  users.mutableUsers = false;
+  nix.allowedUsers = [ "oryon" ];  # it's me!
+
+  # fish-shell (requires modern-unix packages imported)
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      zoxide init fish | source
+      mcfly init fish | source
+      starship init fish | source
+    '';
+  };
+
   imports = [
     # Device specific hardware configuration (change this to your device)
     # ./machines/default
@@ -25,8 +41,9 @@
     # Services
     ./services.nix
 
-    # Users - Don't forget to set a password with 'passwd'.
-    ./users/oryon
+    # Users & Groups
+    ./users/oryon.nix
+    ./users/groups.nix
 
     # TODO: vpn ./vpn.nix
     # TODO: gnome ./gnome.nix
@@ -84,8 +101,10 @@
 
 
   # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
+
+
 
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {

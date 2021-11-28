@@ -92,8 +92,6 @@ If something goes wrong you can't fix, reboot and mount (5) again.
     ```sh
     nixos-install
     reboot
-    # change passwords for root and your user logins
-    passwd [options] [LOGIN]
 
 If you want to implement changes after succesfull installation, build a new config with the next boot.
 

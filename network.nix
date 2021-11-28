@@ -19,6 +19,11 @@
   #   free.wifi = {};            # Public wireless network
   # };
 
+  # surface fixes for off-powering wifi?!
+  # networking.networkmanager.connection.wifi.powersave = 2;
+  # networking.networkmanager.device.wifi.scan-rand-mac-address = false;
+
+
   # === FIREWALL ==============================================================
   # networking.firewall.enable = true;
   # networking.firewall.allowPing = false;

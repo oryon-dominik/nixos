@@ -3,8 +3,10 @@
 
   # Search for packages installed in system profile:  # $ nix search <pkgname>
   environment.systemPackages = with pkgs; [
-    gitMinimal
-    man
+    gitMinimal  # git
+    man  # manpages
+    fortune  # display messages
+    lolcat  # coloured cat
     # if config.services.xserver.enable then
     #       [ firefox
     #         thunderbird
@@ -18,6 +20,8 @@
     #     name = "emacs-25.0-pre";
     #     src = /path/to/my/emacs/tree;
     #   }))
+
+    # gnomeExtensions.FOO
 
   ];
 }
