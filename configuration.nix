@@ -93,7 +93,15 @@
 
   fonts = {
     fontDir.enable = true;
-    fonts = [ pkgs.nerdfonts ];
+    fonts = with pkgs; [ nerdfonts cascadia-code hack-font ];
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        serif = [ "Cascadia Code" ];
+        monospace = [ "Cascadia Code" ];
+        sansSerif = [ "Cascadia Code" ];
+      };
+    };
   };
 
   # nixpkgs = {
