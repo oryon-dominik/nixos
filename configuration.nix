@@ -116,7 +116,7 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+  allowUnfreePredicate = pkg: builtins.elem (builtins.parseDrvName pkg.name).name [
     "vscode"
   ];
 
