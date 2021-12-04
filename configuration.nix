@@ -5,7 +5,7 @@
 # all configuration options are described in the doc's appendix https://nixos.org/manual/nixos/stable/options.html
 
 
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
 
   # DENY root login
   users.users.root.hashedPassword = "!";  # '!' is not hashable, so root login is prohibited
