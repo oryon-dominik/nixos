@@ -116,7 +116,9 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-
+  allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "vscode"
+  ];
 
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {
