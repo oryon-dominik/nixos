@@ -16,6 +16,7 @@
     '';
   nixpkgs.config.allowUnfree = false;  # -> single packages are allowed explicitly
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "vscode"
     "vscode-with-extensions"
   ];
 
