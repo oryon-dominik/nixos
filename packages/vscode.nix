@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   extensions = (with pkgs.vscode-extensions; [
@@ -157,9 +157,15 @@ let
     };
 
 in {
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "vscode-with-extensions"
+  ];
+
   config = {
     environment.systemPackages = [
       vscode-with-extensions
     ];
   };
+
 }

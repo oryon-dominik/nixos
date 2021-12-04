@@ -5,7 +5,7 @@
 # all configuration options are described in the doc's appendix https://nixos.org/manual/nixos/stable/options.html
 
 
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, ... }: {
 
   # DENY root login
   users.users.root.hashedPassword = "!";  # '!' is not hashable, so root login is prohibited
@@ -14,10 +14,8 @@
   nix.extraOptions = ''
       experimental-features = nix-command
     '';
-  # nixpkgs.config.allowUnfree = false;  # -> explicitly allow single packages only
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "vscode"
-  ];
+  # -> single packages are allowed explicitly inside their module files
+  nixpkgs.config.allowUnfree = false;  
 
   # fish-shell (requires modern-unix packages imported)
   programs.fish = {
