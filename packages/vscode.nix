@@ -157,15 +157,12 @@ let
     };
 
 in {
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      "vscode"
+    ];
   config = {
-
     environment.systemPackages = [
       vscode-with-extensions
     ];
-
-    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "vscode"
-    ];
-
   };
 }
