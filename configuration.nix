@@ -14,7 +14,10 @@
   nix.extraOptions = ''
       experimental-features = nix-command
     '';
-  nixpkgs.config.allowUnfree = false;  # -> explicitly allow single packages
+  nixpkgs.config.allowUnfree = false;  # -> explicitly allow single packages only
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (builtins.parseDrvName pkg.name).name [
+    "vscode"
+  ];
 
   # fish-shell (requires modern-unix packages imported)
   programs.fish = {
@@ -115,10 +118,6 @@
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-
-  allowUnfreePredicate = pkg: builtins.elem (builtins.parseDrvName pkg.name).name [
-    "vscode"
-  ];
 
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {
