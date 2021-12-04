@@ -14,8 +14,10 @@
   nix.extraOptions = ''
       experimental-features = nix-command
     '';
-  # -> single packages are allowed explicitly inside their module files
-  nixpkgs.config.allowUnfree = false;  
+  nixpkgs.config.allowUnfree = false;  # -> single packages are allowed explicitly
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "vscode-with-extensions"
+  ];
 
   # fish-shell (requires modern-unix packages imported)
   programs.fish = {
