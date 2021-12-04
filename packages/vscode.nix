@@ -151,16 +151,21 @@ let
       Zignd.html-css-class-completion
 
     ]);
+
   vscode-with-extensions = pkgs.vscode-with-extensions.override {
       vscodeExtensions = extensions;
     };
+
 in {
-  allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "vscode"
-  ];
   config = {
+
     environment.systemPackages = [
       vscode-with-extensions
     ];
+
+    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      "vscode"
+    ];
+
   };
 }
