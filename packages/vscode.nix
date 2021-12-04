@@ -8,8 +8,11 @@ let
       # ms-azuretools.vscode-docker
       # ms-vscode-remote.remote-ssh
 
-      13xforever.language-x86-64-assembly
-      4ops.terraform
+      # TODO: (builtins.fromJSON (builtins.readFile ../vscode-extensions.json));
+
+      # FIXME numbers in variable names suck.. 
+      # 13xforever.language-x86-64-assembly
+      # 4ops.terraform
       aaron-bond.better-comments
       abusaidm.html-snippets
       adpyke.codesnap
