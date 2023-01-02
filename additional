@@ -1,0 +1,18 @@
+error levels:
+ERROR (level 0)
+WARN (level 1)
+NOTICE (level 2)
+INFO (level 3)
+TALKATIVE (level 4)
+CHATTY (level 5)
+DEBUG (level 6)
+VOMIT (level 7)
+
+# gnome shell extension for quake mode
+https://github.com/repsac-by/gnome-shell-extension-quake-mode
+
+
+  # So home-manager doesn't complain (when adding gtk)
+  programs.dconf.enable = true;
+
+# Swap partition, should have made a swap file instead ?!

@@ -1,6 +1,8 @@
 # nixos-config
 oryon's nixos-configuration
 
+# ! this is unfunctional at the moment and I quit using nixos for now !
+
 Cheatsheet: https://nixos.wiki/wiki/Cheatsheet  
 
     nixos-rebuild boot
